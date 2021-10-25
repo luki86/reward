@@ -26,14 +26,16 @@ function CustomerPoints({customer}: CustomerPointsProps) {
     return (
         <section>
             <h2>{customer.name} {customer.surName}</h2>
-            <TransactionTable transactions={customer.transactions} />
+            <TransactionTable transactions={customer.transactions}/>
             <div>
                 Reward points (three months period):
-                {Object.entries(groupTransactionsByMonths(customer.transactions)).map(([month, transactionsInMonth]) => {
-                    return (
-                        <div key={month}>{month} - {getRewardSum(transactionsInMonth)}</div>
-                    );
-                })}
+                <ul>
+                    {Object.entries(groupTransactionsByMonths(customer.transactions)).map(([month, transactionsInMonth]) => {
+                        return (
+                            <li key={month}>{month} - {getRewardSum(transactionsInMonth)}</li>
+                        );
+                    })}
+                </ul>
             </div>
             <div>Reward points sum: <strong>{getRewardSum(customer.transactions)}</strong></div>
         </section>
